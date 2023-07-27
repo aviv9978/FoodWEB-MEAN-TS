@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from 'src/app/services/food.service';
 import { Food } from 'src/app/shared/models/Food';
+import { Tag } from 'src/app/shared/models/Tag';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,9 @@ export class HomeComponent {
         this.foods = this.foodService.getAllFoodsBySearchTerm(
           params.searchTerm
         );
-      else this.foods = foodService.getAll();
+      else if (params.tag)
+        this.foods = this.foodService.getAllFoodByTag(params.tag);
+      else this.foods = foodService.getAllFood();
     });
   }
 }
