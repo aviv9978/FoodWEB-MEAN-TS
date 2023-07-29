@@ -11,9 +11,10 @@ import { FoodPageComponent } from './components/pages/food-page/food-page.compon
 import { StarRatingComponent } from './components/partials/star-rating/star-rating.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { TitleComponent } from './components/partials/title/title.component';
+import { NotFoundComponent } from './components/partial/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, SearchComponent, TagsComponent, FoodPageComponent, StarRatingComponent, CartPageComponent, TitleComponent],
+  declarations: [AppComponent, HeaderComponent, HomeComponent, SearchComponent, TagsComponent, FoodPageComponent, StarRatingComponent, CartPageComponent, TitleComponent, NotFoundComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
