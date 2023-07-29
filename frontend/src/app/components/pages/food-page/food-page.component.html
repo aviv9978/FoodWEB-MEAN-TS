@@ -1,10 +1,10 @@
 <app-not-found
-  [visible]="!food.id"
+  [visible]="!food"
   notFoundMessage="Food Not Found"
   resetLinkText="Return to Homepage..."
 >
 </app-not-found>
-<div class="container" *ngIf="food.id">
+<div class="container" *ngIf="food">
   <img [src]="food.imageUrl" [alt]="food.name" />
   <div class="details">
     <div class="header">

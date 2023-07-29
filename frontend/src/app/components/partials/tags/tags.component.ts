@@ -9,7 +9,9 @@ import { FoodService } from '../../../services/food.service';
 })
 export class TagsComponent {
   tags?: Tag[];
-  constructor(foodService: FoodService) {
-    this.tags = foodService.getAllTags();
-  }
+  constructor(foodService:FoodService) {
+    foodService.getAllTags().subscribe(serverTags => {
+      this.tags = serverTags;
+    });
+   }
 }
