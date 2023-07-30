@@ -13,6 +13,7 @@ import { StarRatingComponent } from './components/partials/star-rating/star-rati
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { TitleComponent } from './components/partials/title/title.component';
 import { NotFoundComponent } from './components/partial/not-found/not-found.component';
+import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NotFoundComponent } from './components/partial/not-found/not-found.comp
     CartPageComponent,
     TitleComponent,
     NotFoundComponent,
+    LoginPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

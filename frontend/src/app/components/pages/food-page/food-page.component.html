@@ -4,7 +4,7 @@
   resetLinkText="Return to Homepage..."
 >
 </app-not-found>
-<div class="container" *ngIf="food">
+<div *ngIf="food" class="container">
   <img [src]="food.imageUrl" [alt]="food.name" />
   <div class="details">
     <div class="header">

@@ -1,6 +1,5 @@
 import {  FOODS_BY_TAG_URL, FOOD_BY_ID_URL } from './../shared/constants/urls';
 import { Injectable } from '@angular/core';
-import { Food } from '../shared/models/Food';
 import { sample_foods, sample_tags } from 'src/data';
 import { Tag } from '../shared/models/Tag';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +9,7 @@ import {
   FOODS_URL,
 } from '../shared/constants/urls';
 import { Observable } from 'rxjs';
+import { Food } from '../shared/models/Food';
 
 @Injectable({
   providedIn: 'root',
