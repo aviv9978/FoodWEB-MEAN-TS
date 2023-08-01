@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/shared/models/Cart';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { CartItem } from '../../../shared/models/CartItem';
 
 @Component({
@@ -9,12 +9,11 @@ import { CartItem } from '../../../shared/models/CartItem';
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css'],
 })
-export class CartPageComponent {
-  cart!: Cart;
-  constructor(private cartService: CartService) {
-    this.cartService
-      .getCartObservable()
-      .subscribe((cart) => (this.cart = cart));
+export class CartPageComponent implements OnInit {
+  cart$!: Observable<Cart>;
+  constructor(private cartService: CartService) {}
+  ngOnInit(): void {
+    this.cart$ = this.cartService.getCartObservable().pipe(shareReplay());
   }
 
   removeFromCart(cartItem: CartItem) {
