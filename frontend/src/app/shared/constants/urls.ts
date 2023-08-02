@@ -9,3 +9,9 @@ export const FOOD_BY_ID_URL = FOODS_URL + '/';
 export const USERS_URL = BASE_URL + '/api/users';
 export const USERS_LOGIN_URL = USERS_URL + '/login';
 export const USERS_REGISTER_URL = USERS_URL + '/register';
+
+export const ORDERS_URL = BASE_URL + '/api/orders';
+export const ORDERS_CREATE_URL = ORDERS_URL + '/create';
+export const ORDERS_NEW_FOR_CURRENT_USER_URL =
+  ORDERS_URL + '/newOrderForCurrentUser';
+export const ORDERS_PAY_URL = ORDERS_URL + '/pay';
