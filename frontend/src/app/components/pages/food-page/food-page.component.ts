@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Observable, shareReplay, tap } from 'rxjs';
+import { Observable, shareReplay, take, tap } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
 import { FoodService } from 'src/app/services/food.service';
 import { Food } from 'src/app/shared/models/Food';
@@ -22,9 +22,10 @@ export class FoodPageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id)
-        this.food$ = this.foodService
-          .getFoodById(params.id)
-          .pipe(shareReplay());          
+        this.food$ = this.foodService.getFoodById(params.id).pipe(
+          tap((food) => (this.food = food)),
+          shareReplay()
+        );
     });
   }
   addToCart() {

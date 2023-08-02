@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { IUserRegister } from 'src/app/shared/Interfaces/IUserRegister';
 import { User } from 'src/app/shared/models/User';
@@ -56,9 +56,8 @@ export class RegisterPageComponent implements OnInit {
       confirmPassword: fv.confirmPassword,
       address: fv.address,
     };
-    this.user$ = this.userService.register(user);
-    this.user$.subscribe(() => {
-      this.router.navigateByUrl(this.returnUrl);
-    });
+    this.user$ = this.userService
+      .register(user)
+      .pipe(tap(() => this.router.navigateByUrl(this.returnUrl)));
   }
 }

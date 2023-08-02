@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
 
@@ -42,7 +42,6 @@ export class LoginPageComponent implements OnInit {
     this.user$ = this.userService.login({
       email: this.fc.email.value,
       password: this.fc.password.value,
-    });
-    this.user$.subscribe((_) => this.router.navigateByUrl(this.returnUrl));
+    }).pipe(tap(() => this.router.navigateByUrl(this.returnUrl)));
   }
 }

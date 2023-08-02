@@ -11,7 +11,6 @@ import { Tag } from 'src/app/shared/models/Tag';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  foods: Food[] = [];
   foods$!: Observable<Food[]>;
   constructor(
     private foodService: FoodService,
@@ -29,7 +28,6 @@ export class HomeComponent implements OnInit {
       else this.foods$ = this.foodService.getAllFood();
 
       this.foods$ = this.foods$.pipe(shareReplay());
-
     });
   }
 }
