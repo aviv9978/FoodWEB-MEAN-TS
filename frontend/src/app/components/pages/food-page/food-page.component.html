@@ -1,40 +1,42 @@
 <app-not-found
-  [visible]="!food"
+  [visible]="!(food$ | async)"
   notFoundMessage="Food Not Found"
   resetLinkText="Return to Homepage..."
 >
 </app-not-found>
-<div *ngIf="food" class="container">
-  <img [src]="food.imageUrl" [alt]="food.name" />
-  <div class="details">
-    <div class="header">
-      <span class="name">{{ food.name }}</span>
-      <span class="favorite {{ food.favorite ? '' : 'not' }}">❤</span>
+<ng-container *ngIf="food$ | async as food">
+  <div class="container">
+    <img [src]="food.imageUrl" [alt]="food.name" />
+    <div class="details">
+      <div class="header">
+        <span class="name">{{ food.name }}</span>
+        <span class="favorite {{ food.favorite ? '' : 'not' }}">❤</span>
+      </div>
+
+      <div class="rating">
+        <star-rating [stars]="food.stars" [size]="1.8" />
+      </div>
+      <div class="origins">
+        <span *ngFor="let origin of food.origins"> {{ origin }}</span>
+      </div>
     </div>
 
-    <div class="rating">
-      <star-rating [stars]="food.stars" [size]="1.8" />
+    <div class="tags">
+      <a *ngFor="let tag of food.tags" routerLink="/tag/{{ tag }}">{{ tag }}</a>
     </div>
-    <div class="origins">
-      <span *ngFor="let origin of food.origins"> {{ origin }}</span>
+
+    <div class="cook-time">
+      <span>
+        Time to cook about <strong>{{ food.cookTime }}</strong> minutes
+      </span>
     </div>
-  </div>
 
-  <div class="tags">
-    <a *ngFor="let tag of food.tags" routerLink="/tag/{{ tag }}">{{ tag }}</a>
-  </div>
+    <div class="price">
+      <span>
+        {{ food.price | currency }}
+      </span>
+    </div>
 
-  <div class="cook-time">
-    <span>
-      Time to cook about <strong>{{ food.cookTime }}</strong> minutes
-    </span>
+    <button (click)="addToCart()">Add To Cart</button>
   </div>
-
-  <div class="price">
-    <span>
-      {{ food.price | currency }}
-    </span>
-  </div>
-
-  <button (click)="addToCart()">Add To Cart</button>
-</div>
+</ng-container>

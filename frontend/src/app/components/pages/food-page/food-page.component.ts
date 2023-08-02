@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Observable, shareReplay, tap } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
 import { FoodService } from 'src/app/services/food.service';
 import { Food } from 'src/app/shared/models/Food';
@@ -9,19 +10,21 @@ import { Food } from 'src/app/shared/models/Food';
   templateUrl: './food-page.component.html',
   styleUrls: ['./food-page.component.css'],
 })
-export class FoodPageComponent {
+export class FoodPageComponent implements OnInit {
   food!: Food;
+  food$!: Observable<Food>;
   constructor(
-    activatedRoute: ActivatedRoute,
-    foodService: FoodService,
+    private activatedRoute: ActivatedRoute,
+    private foodService: FoodService,
     private cartService: CartService,
     private router: Router
-  ) {
-    activatedRoute.params.subscribe((params) => {
+  ) {}
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
       if (params.id)
-        foodService.getFoodById(params.id).subscribe((serverFood: Food) => {
-          this.food = serverFood;
-        });
+        this.food$ = this.foodService
+          .getFoodById(params.id)
+          .pipe(shareReplay());          
     });
   }
   addToCart() {

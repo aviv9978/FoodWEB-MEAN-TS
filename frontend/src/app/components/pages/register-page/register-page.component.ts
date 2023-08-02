@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { IUserRegister } from 'src/app/shared/Interfaces/IUserRegister';
+import { User } from 'src/app/shared/models/User';
 import { PasswordMatchValidator } from 'src/app/shared/validators/password_match_validators';
 
 @Component({
@@ -14,7 +16,7 @@ export class RegisterPageComponent implements OnInit {
   returnUrl = '';
   registerForm!: FormGroup;
   isSubmited = false;
-
+  user$!: Observable<User>;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -54,7 +56,8 @@ export class RegisterPageComponent implements OnInit {
       confirmPassword: fv.confirmPassword,
       address: fv.address,
     };
-    this.userService.register(user).subscribe(() => {
+    this.user$ = this.userService.register(user);
+    this.user$.subscribe(() => {
       this.router.navigateByUrl(this.returnUrl);
     });
   }
